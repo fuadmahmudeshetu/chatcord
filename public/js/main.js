@@ -37,5 +37,4 @@ function outputMessage(message) {
     `;
 
     document.querySelector('.chat-messages').appendChild(div);
-
 }
