@@ -2,11 +2,18 @@ const getChatForm = document.getElementById('chat-form');
 
 const socket = io();
 
-// get the message from the server
-socket.on('message',  (message) => {
-    console.log(message);
-    outputMessage(message);
+// get username and room from url
+const { username, room } = Qs.parse(location.search, {
+    ignoreQueryPrefix: true
 })
+
+console.log(username, room)
+
+    // get the message from the server
+    socket.on('message', (message) => {
+        console.log(message);
+        outputMessage(message);
+    })
 
 getChatForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -14,7 +21,7 @@ getChatForm.addEventListener('submit', (e) => {
     let msg = e.target.elements.msg.value;
 
     socket.emit('chatMessage', msg);
-    
+
     e.target.elements.msg.value = '';
 });
 
@@ -30,5 +37,5 @@ function outputMessage(message) {
     `;
 
     document.querySelector('.chat-messages').appendChild(div);
-    
+
 }
