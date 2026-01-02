@@ -12,7 +12,6 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 // Run the client connects
 io.on('connection', socket => {
-    console.log('New ws connection...')
 
     // Welcome Current User
     socket.emit('message', 'Welcome to chat cord')
@@ -25,7 +24,11 @@ io.on('connection', socket => {
     socket.on('disconnect', () => {
         io.emit('message', 'A user has left the chat');
     })
-})
+
+    socket.on('chatMessage', (msg) => {
+        console.log(msg)
+    });
+});
 
 const PORT = process.env.PORT || 3000
 
