@@ -1,4 +1,6 @@
 const getChatForm = document.getElementById('chat-form');
+const roomName = document.getElementById('room-name');
+const userList = document.getElementById('users');
 
 const socket = io();
 
@@ -45,3 +47,13 @@ function outputMessage(message) {
     document.querySelector('.chat-messages').appendChild(div);
 }
 
+// Add room name to DOM
+
+function outputRoomName(room) {
+    roomName.innerText = room;
+}
+
+function outputUsers(users) {
+    userList.innerHTML = `
+    ${users.map(user=> `<li>${user.username}</li>`).join('')}`;
+}
