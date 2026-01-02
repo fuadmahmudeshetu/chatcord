@@ -22,15 +22,11 @@ getChatForm.addEventListener('submit', (e) => {
 
 function outputMessage(message) {
     const div = document.createElement('div');
-    const now = new Date();
-    const hours = now.getHours().toString().padStart(2, '0');
-    const minutes = now.getMinutes().toString().padStart(2, '0');
-    const timeFormat = `${hours}:${minutes}`;
 
     div.classList.add('message');
     div.innerHTML = `
-    <p class='meta'>Brad <span>${timeFormat}</span></p>
-    <p class='text'>${message}</p>
+    <p class='meta'>${message.username}<span> ${message.time}</span></p>
+    <p class='text'>${message.text}</p>
     `;
 
     document.querySelector('.chat-messages').appendChild(div);

@@ -2,6 +2,7 @@ const path = require('path')
 const http = require('http')
 const express = require('express')
 const { Server } = require('socket.io')
+const formatMessage = require('./utils/messages')
 
 
 const app = express()
@@ -9,12 +10,13 @@ const server = http.createServer(app)
 const io = new Server(server);
 
 app.use(express.static(path.join(__dirname, 'public')))
+const chatBot = 'ChatCord Bot'
 
 // Run the client connects
 io.on('connection', socket => {
 
     // Welcome Current User
-    socket.emit('message', 'Welcome to chat cord')
+    socket.emit('message', formatMessage(chatBot, 'Welcome to chatcord app'))
 
     // Broadcast when a user connects
     socket.broadcast.emit('message', 'A user has joined the chat');
