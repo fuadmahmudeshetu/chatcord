@@ -7,13 +7,13 @@ const { username, room } = Qs.parse(location.search, {
     ignoreQueryPrefix: true
 })
 
-console.log(username, room)
+socket.emit('joinRoom', { username, room});
 
-    // get the message from the server
-    socket.on('message', (message) => {
-        console.log(message);
-        outputMessage(message);
-    })
+// get the message from the server
+socket.on('message', (message) => {
+    console.log(message);
+    outputMessage(message);
+})
 
 getChatForm.addEventListener('submit', (e) => {
     e.preventDefault();
