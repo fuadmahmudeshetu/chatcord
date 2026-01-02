@@ -2,6 +2,10 @@ const getChatForm = document.getElementById('chat-form');
 
 const socket = io();
 
+socket.on('message',  (message) => {
+    console.log(message)
+})
+
 getChatForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
